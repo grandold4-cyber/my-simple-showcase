@@ -36,27 +36,23 @@ function AdminPage() {
   useEffect(() => {
     (async () => {
       const { data: u } = await supabase.auth.getUser();
-      if (!u.user) return;
+      if (!u.user) {
+        window.location.href = "/auth";
+        return;
+      }
       const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", u.user.id);
-      setIsAdmin(!!roles?.some((r) => r.role === "admin"));
+      const admin = !!roles?.some((r) => r.role === "admin");
+      if (!admin) {
+        // Non-admins are not allowed past /auth — sign them out and send back.
+        await supabase.auth.signOut();
+        window.location.href = "/auth?error=not_admin";
+        return;
+      }
+      setIsAdmin(true);
     })();
   }, []);
 
-  if (isAdmin === null) return <Layout><div className="pt-40 pb-24 text-center"><Loader2 className="h-6 w-6 animate-spin mx-auto" /></div></Layout>;
-
-  if (!isAdmin) {
-    return (
-      <Layout>
-        <section className="pt-40 pb-24 mx-auto max-w-xl px-6 text-center">
-          <h1 className="font-display text-3xl font-bold">You're signed in, but not an admin yet.</h1>
-          <p className="mt-3 text-muted-foreground">Ask the site owner to grant you the <code>admin</code> role in the database (table <code>user_roles</code>).</p>
-          <button onClick={() => supabase.auth.signOut().then(() => window.location.href = "/")} className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">
-            <LogOut className="h-4 w-4" /> Sign out
-          </button>
-        </section>
-      </Layout>
-    );
-  }
+  if (isAdmin === null) return <Layout><div className="pt-40 pb-24 text-center"><Loader2 className="h-6 w-6 animate-spin mx-auto" /><p className="mt-3 text-sm text-muted-foreground">Verifying admin access…</p></div></Layout>;
 
   const tabs: { id: Tab; label: string; Icon: any }[] = [
     { id: "admissions", label: "Admissions", Icon: GraduationCap },
