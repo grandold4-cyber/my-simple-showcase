@@ -34,9 +34,20 @@ function AuthPage() {
     const fn = mode === "signin"
       ? supabase.auth.signInWithPassword({ email, password })
       : supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin + "/admin" } });
-    const { error } = await fn;
-    setLoading(false);
-    if (error) { setError(error.message); return; }
+    const { data, error } = await fn;
+    if (error) { setLoading(false); setError(error.message); return; }
+
+    // Enforce admin-only access — any non-admin is signed out immediately.
+    const userId = data.user?.id ?? (await supabase.auth.getUser()).data.user?.id;
+    if (!userId) { setLoading(false); setError("Sign-in failed. Please try again."); return; }
+    const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", userId);
+    const isAdmin = !!roles?.some((r) => r.role === "admin");
+    if (!isAdmin) {
+      await supabase.auth.signOut();
+      setLoading(false);
+      setError("Access denied. This account does not have admin privileges.");
+      return;
+    }
     window.location.href = "/admin";
   }
 
