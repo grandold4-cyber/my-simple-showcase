@@ -44,7 +44,7 @@ function Page() {
         </ul>
 
         <h2>5. Reporting concerns</h2>
-        <p>Any concern, disclosure or suspicion of abuse must be reported immediately to the Designated Safeguarding Lead at <strong>safeguarding@54globalafrikan.org</strong> or <strong>+254 700 000 000</strong>. Concerns are documented, investigated and, where required, referred to the relevant Kenyan authorities.</p>
+        <p>Any concern, disclosure or suspicion of abuse must be reported immediately to the Designated Safeguarding Lead at <strong>rsimiyu7@gmail.com</strong> or <strong>+254 715 297 696</strong>. Concerns are documented, investigated and, where required, referred to the relevant Kenyan authorities.</p>
 
         <h2>6. Confidentiality</h2>
         <p>Information is shared only with those who need to know, in line with the Children Act of Kenya and applicable data protection law.</p>
