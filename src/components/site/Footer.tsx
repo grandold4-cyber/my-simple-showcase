@@ -93,8 +93,8 @@ export function Footer() {
           <h4 className="text-sm font-semibold uppercase tracking-wider text-primary">Contact</h4>
           <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
             <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 text-primary" /> Nairobi, Kenya</li>
-            <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5 text-primary" /> +254 700 000 000</li>
-            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 text-primary" /> hello@54globalafrikan.org</li>
+            <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5 text-primary" /><a href="tel:+254715297696" className="hover:text-primary">+254 715 297 696</a></li>
+            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 text-primary" /><a href="mailto:rsimiyu7@gmail.com" className="hover:text-primary">rsimiyu7@gmail.com</a></li>
           </ul>
         </div>
       </div>

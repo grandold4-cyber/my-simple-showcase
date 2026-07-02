@@ -7,6 +7,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { supabase } from "@/integrations/supabase/client";
 import hero from "@/assets/community.jpg";
+import mpesaImg from "@/assets/mpesa-till.jpeg.asset.json";
 
 export const Route = createFileRoute("/donate")({
   component: DonatePage,
@@ -193,28 +194,39 @@ function DonatePage() {
           <Reveal delay={120}>
             <div className="rounded-3xl glass-blue p-8 space-y-6">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-primary">M-Pesa Paybill</p>
-                <div className="mt-2 font-display text-3xl font-bold">Paybill: <span className="text-gradient-spirit">400 200</span></div>
-                <div className="text-sm text-muted-foreground">Account: <strong>54GA</strong> (or CHURCH / SCHOOL)</div>
-              </div>
-              <div className="h-px bg-border" />
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-primary">Bank transfer</p>
-                <ul className="mt-2 text-sm space-y-1">
-                  <li>Bank: Equity Bank, Kenya</li>
-                  <li>Account name: 54 Global Afrikan</li>
-                  <li>Account no.: <strong>0123 4567 8910</strong></li>
-                  <li>Swift: EQBLKENA</li>
+                <p className="text-xs uppercase tracking-[0.3em] text-primary">Lipa na M-Pesa</p>
+                <div className="mt-3 rounded-2xl overflow-hidden bg-white">
+                  <img src={mpesaImg.url} alt="M-Pesa Buy Goods Till 5672838 PINPLACE" className="w-full h-auto" loading="lazy" />
+                </div>
+                <ul className="mt-3 text-sm space-y-1">
+                  <li>Buy Goods Till: <strong className="font-mono text-lg">5672838</strong></li>
+                  <li>Business Name: <strong>PINPLACE</strong></li>
                 </ul>
               </div>
               <div className="h-px bg-border" />
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-primary">PayPal</p>
-                <p className="mt-2 text-sm">give@54globalafrikan.org</p>
+                <a href="https://www.paypal.com/paypalme/RSIMIYU7" target="_blank" rel="noreferrer" className="mt-2 inline-block text-sm font-semibold text-primary break-all">RSIMIYU7@GMAIL.COM</a>
               </div>
               <div className="h-px bg-border" />
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-primary">Feed a Child</p>
+                <ul className="mt-2 text-sm space-y-1">
+                  <li><strong>$5</strong> — 3 meals for one day</li>
+                  <li><strong>$25</strong> — feed a child for a month</li>
+                  <li><strong>$75</strong> — feed a child for a full term</li>
+                </ul>
+              </div>
+              <div className="h-px bg-border" />
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-primary">Contact</p>
+                <ul className="mt-2 text-sm space-y-1">
+                  <li><a href="tel:+254715297696" className="hover:text-primary">+254 715 297 696</a></li>
+                  <li><a href="https://wa.me/254715297696" target="_blank" rel="noreferrer" className="hover:text-primary">WhatsApp: +254 715 297 696</a></li>
+                </ul>
+              </div>
               <div className="text-xs text-muted-foreground">
-                54 Global Afrikan is a registered faith-based organisation. Gifts are used for ministry, education and community work. All donor data is handled per our <a href="/policies/privacy" className="text-primary">privacy policy</a>.
+                54 Global Afrikan is a registered faith-based organisation. Gifts are used for ministry, education and community work. See our <a href="/policies/privacy" className="text-primary">privacy policy</a>.
               </div>
             </div>
           </Reveal>
