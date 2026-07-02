@@ -10,7 +10,7 @@ export function PageHero({
   image: string;
 }) {
   return (
-    <section className="relative pt-40 pb-20 overflow-hidden">
+    <section className="relative pt-40 pb-24 overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <img src={image} alt="" className="h-full w-full object-cover opacity-90" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/10 to-background/40" />
@@ -19,11 +19,11 @@ export function PageHero({
       </div>
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <p className="text-xs uppercase tracking-[0.3em] text-primary">{eyebrow}</p>
-          <h1 className="mt-4 font-display text-5xl sm:text-7xl font-bold leading-[1.05] max-w-4xl">
-            {title} {accent && <span className="text-gradient-gold">{accent}</span>}
+          <p className="text-sm sm:text-base uppercase tracking-[0.3em] text-primary font-semibold">{eyebrow}</p>
+          <h1 className="mt-5 font-display text-6xl sm:text-8xl lg:text-9xl font-black leading-[0.95] tracking-tight max-w-5xl drop-shadow-2xl">
+            {title} {accent && <span className="text-gradient-gold block sm:inline">{accent}</span>}
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">{subtitle}</p>
+          <p className="mt-8 max-w-2xl text-lg sm:text-xl text-foreground/80 leading-relaxed">{subtitle}</p>
         </Reveal>
       </div>
     </section>

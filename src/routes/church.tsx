@@ -1,12 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Baby, Users, Music, HandHeart, BookOpen, Sparkles, Calendar, PlayCircle, ArrowRight, Heart,
+  Globe, Church as ChurchIcon, GraduationCap, Compass, HandCoins, Smartphone, Phone,
 } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
+import { CONTACT_PHONE, CONTACT_PHONE_DISPLAY, CONTACT_WHATSAPP_URL } from "@/components/site/WhatsAppFab";
 import hero from "@/assets/hero-worship.jpg";
 import pastor from "@/assets/pastor.png";
+import mpesaImg from "@/assets/mpesa-till.jpeg.asset.json";
 
 export const Route = createFileRoute("/church")({
   component: ChurchPage,
@@ -140,12 +143,170 @@ function ChurchPage() {
                   </div>
                   <h3 className="mt-5 text-lg font-semibold">{m.t}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{m.d}</p>
-                  <button className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
+                  <Link
+                    to="/contact"
+                    className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:gap-2 transition-all"
+                  >
                     Learn more <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition" />
-                  </button>
+                  </Link>
                 </div>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Missions */}
+      <section className="py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal>
+            <p className="text-xs uppercase tracking-[0.3em] text-primary">Missions</p>
+            <h2 className="mt-3 font-display text-4xl sm:text-5xl font-bold">Take the gospel to the nations.</h2>
+            <p className="mt-4 max-w-2xl text-muted-foreground">
+              Partner with Praise Church International to send missionaries, plant churches, and strengthen the harvest across Africa and beyond.
+            </p>
+          </Reveal>
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { Icon: Globe, t: "Support Missionaries", d: "Sustain field workers on the front lines of the gospel." },
+              { Icon: Compass, t: "Mission Trips", d: "Join short-term teams reaching unreached communities." },
+              { Icon: ChurchIcon, t: "Plant Churches", d: "Help establish new congregations in villages and cities." },
+              { Icon: GraduationCap, t: "Train Pastors", d: "Equip shepherds through discipleship and Bible school." },
+              { Icon: BookOpen, t: "Sponsor Evangelism", d: "Fund crusades, tracts, and evangelistic outreaches." },
+              { Icon: HandHeart, t: "Support Rural Churches", d: "Come alongside pastors serving in remote regions." },
+            ].map((m, i) => (
+              <Reveal key={m.t} delay={i * 60}>
+                <div className="h-full rounded-3xl glass p-6 hover:ring-gold transition">
+                  <div className="h-12 w-12 grid place-items-center rounded-2xl bg-primary/15 text-primary">
+                    <m.Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-semibold">{m.t}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{m.d}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Give */}
+      <section className="py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal>
+            <p className="text-xs uppercase tracking-[0.3em] text-primary">Give</p>
+            <h2 className="mt-3 font-display text-4xl sm:text-5xl font-bold">Sow into Kingdom work.</h2>
+            <p className="mt-4 max-w-2xl text-muted-foreground">
+              Your generosity fuels worship, missions, and mercy. Choose a fund below or use the payment details to give directly.
+            </p>
+          </Reveal>
+
+          <div className="mt-12 grid lg:grid-cols-[1.1fr,1fr] gap-6">
+            {/* Funds */}
+            <Reveal>
+              <div className="rounded-3xl glass p-8">
+                <div className="flex items-center gap-3">
+                  <HandCoins className="h-6 w-6 text-primary" />
+                  <h3 className="font-display text-2xl font-bold">Giving Funds</h3>
+                </div>
+                <ul className="mt-6 grid sm:grid-cols-2 gap-3">
+                  {[
+                    "Tithes",
+                    "Offering",
+                    "Building Fund",
+                    "Mission Fund",
+                    "Feed the Hungry",
+                    "Sponsor a Widow",
+                    "Sponsor a Child",
+                    "Pastors Support Fund",
+                    "Emergency Relief Fund",
+                  ].map((f) => (
+                    <li key={f} className="flex items-center gap-2 rounded-xl bg-white/50 border border-border px-4 py-3 text-sm font-medium">
+                      <Heart className="h-4 w-4 text-primary" /> {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-8 rounded-2xl bg-primary/5 border border-primary/20 p-6">
+                  <p className="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Feed a Child</p>
+                  <div className="mt-3 grid sm:grid-cols-3 gap-3">
+                    {[
+                      { p: "$5", l: "3 meals · 1 day" },
+                      { p: "$25", l: "meals for 1 month" },
+                      { p: "$75", l: "meals for 1 term" },
+                    ].map((x) => (
+                      <div key={x.p} className="rounded-xl bg-white p-4 text-center border border-border">
+                        <div className="font-display text-2xl font-bold text-gradient-spirit">{x.p}</div>
+                        <div className="text-xs text-muted-foreground mt-1">{x.l}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <Link
+                  to="/donate"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground glow-spirit"
+                >
+                  <Heart className="h-4 w-4" /> Give Now
+                </Link>
+              </div>
+            </Reveal>
+
+            {/* Payment details */}
+            <Reveal delay={120}>
+              <div className="rounded-3xl glass-blue p-8 space-y-6">
+                {/* M-Pesa */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Smartphone className="h-5 w-5 text-primary" />
+                    <p className="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Lipa na M-Pesa</p>
+                  </div>
+                  <div className="rounded-2xl overflow-hidden border border-border bg-white">
+                    <img src={mpesaImg.url} alt="M-Pesa Buy Goods Till Number 5672838 PINPLACE" className="w-full h-auto" loading="lazy" />
+                  </div>
+                  <div className="mt-3 text-sm">
+                    <div>Buy Goods Till: <strong className="font-mono text-lg">5672838</strong></div>
+                    <div className="text-muted-foreground">Business Name: <strong>PINPLACE</strong></div>
+                  </div>
+                </div>
+
+                <div className="h-px bg-border" />
+
+                {/* PayPal */}
+                <div>
+                  <div className="flex items-center gap-2">
+                    <Globe className="h-5 w-5 text-primary" />
+                    <p className="text-xs uppercase tracking-[0.3em] text-primary font-semibold">PayPal</p>
+                  </div>
+                  <a
+                    href="https://www.paypal.com/paypalme/RSIMIYU7"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-3 block font-mono text-sm font-semibold text-primary hover:underline break-all"
+                  >
+                    RSIMIYU7@GMAIL.COM
+                  </a>
+                  <p className="mt-1 text-xs text-muted-foreground">Ideal for international givers.</p>
+                </div>
+
+                <div className="h-px bg-border" />
+
+                {/* Contact */}
+                <div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="h-5 w-5 text-primary" />
+                    <p className="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Confirm your gift</p>
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <a href={`tel:${CONTACT_PHONE}`} className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
+                      <Phone className="h-4 w-4" /> {CONTACT_PHONE_DISPLAY}
+                    </a>
+                    <a href={CONTACT_WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-green-500 px-4 py-2 text-sm font-semibold text-white">
+                      WhatsApp
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
