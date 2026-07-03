@@ -1,2 +1,3 @@
 [build]
-  publish = "."
+  command = "bun run build"
+  publish = "dist/client"
