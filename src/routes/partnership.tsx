@@ -19,9 +19,9 @@ export const Route = createFileRoute("/partnership")({
 });
 
 const tiers = [
-  { name: "Friend", amount: "KES 1,000 / mo", Icon: Sparkles, perks: ["Monthly devotional", "Prayer updates", "Impact report"] },
-  { name: "Sower", amount: "KES 5,000 / mo", Icon: HandHeart, perks: ["All Friend benefits", "Sponsor 1 child meal/month", "Invitations to partner gatherings"], highlight: true },
-  { name: "Pillar", amount: "KES 25,000 / mo", Icon: Crown, perks: ["All Sower benefits", "Full child scholarship", "Quarterly call with leadership", "Named recognition"] },
+  { name: "Friend", amount: "$10 / mo", Icon: Sparkles, perks: ["Monthly devotional", "Prayer updates", "Impact report"] },
+  { name: "Sower", amount: "$40 / mo", Icon: HandHeart, perks: ["All Friend benefits", "Sponsor 1 child meal/month", "Invitations to partner gatherings"], highlight: true },
+  { name: "Pillar", amount: "$200 / mo", Icon: Crown, perks: ["All Sower benefits", "Full child scholarship", "Quarterly call with leadership", "Named recognition"] },
 ];
 
 function PartnershipPage() {
