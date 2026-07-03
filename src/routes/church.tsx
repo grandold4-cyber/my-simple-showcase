@@ -9,7 +9,8 @@ import { Reveal } from "@/components/site/Reveal";
 import { CONTACT_PHONE, CONTACT_PHONE_DISPLAY, CONTACT_WHATSAPP_URL } from "@/components/site/WhatsAppFab";
 import hero from "@/assets/hero-worship.jpg";
 import pastor from "@/assets/pastor.png";
-import mpesaImg from "@/assets/mpesa-till.jpeg.asset.json";
+import churchLogo from "@/assets/logo.png";
+import schoolLogo from "@/assets/halel-school-logo.jpeg.asset.json";
 
 export const Route = createFileRoute("/church")({
   component: ChurchPage,
@@ -253,57 +254,53 @@ function ChurchPage() {
 
             {/* Payment details */}
             <Reveal delay={120}>
-              <div className="rounded-3xl glass-blue p-8 space-y-6">
-                {/* M-Pesa */}
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Smartphone className="h-5 w-5 text-primary" />
-                    <p className="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Lipa na M-Pesa</p>
-                  </div>
-                  <div className="rounded-2xl overflow-hidden border border-border bg-white">
-                    <img src={mpesaImg.url} alt="M-Pesa Buy Goods Till Number 5672838 PINPLACE" className="w-full h-auto" loading="lazy" />
-                  </div>
-                  <div className="mt-3 text-sm">
-                    <div>Buy Goods Till: <strong className="font-mono text-lg">5672838</strong></div>
-                    <div className="text-muted-foreground">Business Name: <strong>PINPLACE</strong></div>
+              <div className="rounded-3xl bg-white border-2 border-primary/30 p-8 space-y-5 shadow-xl">
+                <div className="flex items-center gap-4 pb-3 border-b border-border">
+                  <img src={churchLogo} alt="Praise Church" className="h-12 w-12 object-contain" />
+                  <img src={schoolLogo.url} alt="Halel School" className="h-12 w-12 object-contain rounded" />
+                  <p className="font-display font-bold">Give Directly</p>
+                </div>
+
+                <div className="rounded-2xl bg-emerald-50 border-2 border-emerald-500 p-5">
+                  <p className="text-sm uppercase tracking-widest text-emerald-700 font-bold">M-Pesa · Buy Goods</p>
+                  <p className="mt-2 font-display text-4xl font-black text-emerald-800 tracking-wider">5672838</p>
+                  <p className="mt-1 text-base font-bold text-emerald-900">Business: PINPLACE</p>
+                </div>
+
+                <div className="rounded-2xl bg-sky-50 border-2 border-sky-500 p-5">
+                  <p className="text-sm uppercase tracking-widest text-sky-700 font-bold">M-Pesa Paybill · Rafiki Bank</p>
+                  <div className="mt-2 grid grid-cols-2 gap-3">
+                    <div>
+                      <p className="text-xs font-semibold text-sky-900/70">Business No.</p>
+                      <p className="font-display text-2xl font-black text-sky-800">802200</p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-sky-900/70">Account No.</p>
+                      <p className="font-display text-2xl font-black text-sky-800">602743</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="h-px bg-border" />
+                <div className="rounded-2xl bg-red-50 border-2 border-red-500 p-5">
+                  <p className="text-sm uppercase tracking-widest text-red-700 font-bold">Equity Bank Kenya</p>
+                  <p className="mt-2 font-display text-2xl font-black text-red-800 break-all">0950183816898</p>
+                  <p className="mt-1 text-base font-bold text-red-900">Halel School</p>
+                </div>
 
-                {/* PayPal */}
-                <div>
-                  <div className="flex items-center gap-2">
-                    <Globe className="h-5 w-5 text-primary" />
-                    <p className="text-xs uppercase tracking-[0.3em] text-primary font-semibold">PayPal</p>
-                  </div>
-                  <a
-                    href="https://www.paypal.com/paypalme/RSIMIYU7"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-3 block font-mono text-sm font-semibold text-primary hover:underline break-all"
-                  >
+                <div className="rounded-2xl bg-indigo-50 border-2 border-indigo-500 p-5">
+                  <p className="text-sm uppercase tracking-widest text-indigo-700 font-bold">PayPal</p>
+                  <a href="https://www.paypal.com/paypalme/RSIMIYU7" target="_blank" rel="noreferrer" className="mt-2 block font-display text-lg font-black text-indigo-800 break-all hover:underline">
                     RSIMIYU7@GMAIL.COM
                   </a>
-                  <p className="mt-1 text-xs text-muted-foreground">Ideal for international givers.</p>
                 </div>
 
-                <div className="h-px bg-border" />
-
-                {/* Contact */}
-                <div>
-                  <div className="flex items-center gap-2">
-                    <Phone className="h-5 w-5 text-primary" />
-                    <p className="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Confirm your gift</p>
-                  </div>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <a href={`tel:${CONTACT_PHONE}`} className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
-                      <Phone className="h-4 w-4" /> {CONTACT_PHONE_DISPLAY}
-                    </a>
-                    <a href={CONTACT_WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-green-500 px-4 py-2 text-sm font-semibold text-white">
-                      WhatsApp
-                    </a>
-                  </div>
+                <div className="flex flex-wrap gap-2 pt-2">
+                  <a href={`tel:${CONTACT_PHONE}`} className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground">
+                    <Phone className="h-4 w-4" /> {CONTACT_PHONE_DISPLAY}
+                  </a>
+                  <a href={CONTACT_WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-green-600 px-4 py-2 text-sm font-bold text-white">
+                    WhatsApp
+                  </a>
                 </div>
               </div>
             </Reveal>

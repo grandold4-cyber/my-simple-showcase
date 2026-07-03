@@ -32,6 +32,7 @@ type Item = { id: string; section: string; kind: string; url: string; title: str
 function GalleryPage() {
   const { section } = useSearch({ from: "/gallery" });
   const [items, setItems] = useState<Item[] | null>(null);
+  const [lightbox, setLightbox] = useState<Item | null>(null);
 
   useEffect(() => {
     setItems(null);
@@ -39,11 +40,17 @@ function GalleryPage() {
       .then(({ data }: any) => {
         const dbItems = (data ?? []) as Item[];
         const fallback = staticGallery.filter((s) => s.section === section) as unknown as Item[];
-        // Merge: DB items first, then any static ones whose URL isn't already present.
         const seen = new Set(dbItems.map((d) => d.url));
         setItems([...dbItems, ...fallback.filter((f) => !seen.has(f.url))]);
       });
   }, [section]);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setLightbox(null); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightbox]);
 
   const titles: Record<string, { eyebrow: string; title: string; accent: string; sub: string }> = {
     school: { eyebrow: "Halel School Gallery", title: "Life at", accent: "Halel.", sub: "A peek into our classrooms, events and student journey." },
@@ -82,7 +89,14 @@ function GalleryPage() {
                   {it.kind === "video" ? (
                     <video src={it.url} controls className="w-full aspect-video bg-black object-cover" />
                   ) : (
-                    <img src={it.url} alt={it.title ?? ""} loading="lazy" className="w-full aspect-[4/3] object-cover transition-transform group-hover:scale-105" />
+                    <button
+                      type="button"
+                      onClick={() => setLightbox(it)}
+                      className="block w-full text-left cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-primary"
+                      aria-label={`Open ${it.title ?? "image"} in full view`}
+                    >
+                      <img src={it.url} alt={it.title ?? ""} loading="lazy" className="w-full aspect-[4/3] object-cover transition-transform group-hover:scale-105" />
+                    </button>
                   )}
                   {(it.title || it.caption) && (
                     <figcaption className="p-4">
@@ -96,6 +110,29 @@ function GalleryPage() {
           )}
         </div>
       </section>
+
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setLightbox(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <button
+            className="absolute top-4 right-4 h-11 w-11 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl flex items-center justify-center"
+            onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
+            aria-label="Close"
+          >
+            ×
+          </button>
+          <img
+            src={lightbox.url}
+            alt={lightbox.title ?? ""}
+            className="max-h-[90vh] max-w-[95vw] object-contain rounded-lg shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </Layout>
   );
 }
