@@ -7,7 +7,8 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { supabase } from "@/integrations/supabase/client";
 import hero from "@/assets/community.jpg";
-import mpesaImg from "@/assets/mpesa-till.jpeg.asset.json";
+import churchLogo from "@/assets/logo.png";
+import schoolLogo from "@/assets/halel-school-logo.jpeg.asset.json";
 
 export const Route = createFileRoute("/donate")({
   component: DonatePage,
@@ -35,7 +36,7 @@ const schema = z.object({
   message: z.string().max(500).optional().or(z.literal("")),
 });
 
-const presets = [500, 1000, 2500, 5000, 10000];
+const presets = [10, 25, 50, 100, 250];
 
 function DonatePage() {
   const [amount, setAmount] = useState<number>(2500);
@@ -132,8 +133,8 @@ function DonatePage() {
                     <div className="mt-3 grid grid-cols-[1fr,auto] gap-2">
                       <input name="amount" type="number" min={1} value={amount} onChange={(e) => setAmount(Number(e.target.value))}
                         className="rounded-xl bg-input border border-border px-4 py-3 text-sm outline-none focus:ring-2 ring-primary/40" />
-                      <select name="currency" defaultValue="KES" className="rounded-xl bg-input border border-border px-3 py-3 text-sm">
-                        <option>KES</option><option>USD</option><option>EUR</option><option>GBP</option>
+                      <select name="currency" defaultValue="USD" className="rounded-xl bg-input border border-border px-3 py-3 text-sm">
+                        <option>USD</option><option>EUR</option><option>GBP</option><option>KES</option>
                       </select>
                     </div>
                   </div>
@@ -183,7 +184,7 @@ function DonatePage() {
 
                   <button disabled={status === "saving"} className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground glow-spirit disabled:opacity-60">
                     {status === "saving" ? <Loader2 className="h-4 w-4 animate-spin" /> : <Heart className="h-4 w-4" />}
-                    Give {amount ? `KES ${amount.toLocaleString()}` : ""}
+                    Give {amount ? `$${amount.toLocaleString()}` : ""}
                   </button>
                   <p className="text-xs text-muted-foreground">Card & PayPal checkout opens after we confirm your pledge. For instant giving use M-Pesa or bank transfer details on the right.</p>
                 </form>
@@ -192,41 +193,70 @@ function DonatePage() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="rounded-3xl glass-blue p-8 space-y-6">
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-primary">Lipa na M-Pesa</p>
-                <div className="mt-3 rounded-2xl overflow-hidden bg-white">
-                  <img src={mpesaImg.url} alt="M-Pesa Buy Goods Till 5672838 PINPLACE" className="w-full h-auto" loading="lazy" />
+            <div className="rounded-3xl bg-white border-2 border-primary/30 p-8 space-y-6 shadow-xl">
+              <div className="flex items-center gap-4 pb-4 border-b border-border">
+                <img src={churchLogo} alt="Praise Church" className="h-14 w-14 object-contain" />
+                <img src={schoolLogo.url} alt="Halel School" className="h-14 w-14 object-contain rounded" />
+                <div>
+                  <p className="font-display font-bold text-lg leading-tight">Praise Church &amp; Halel School</p>
+                  <p className="text-xs text-muted-foreground">Official payment channels</p>
                 </div>
-                <ul className="mt-3 text-sm space-y-1">
-                  <li>Buy Goods Till: <strong className="font-mono text-lg">5672838</strong></li>
-                  <li>Business Name: <strong>PINPLACE</strong></li>
+              </div>
+
+              {/* M-Pesa Till */}
+              <div className="rounded-2xl bg-emerald-50 border-2 border-emerald-500 p-5">
+                <p className="text-sm uppercase tracking-widest text-emerald-700 font-bold">M-Pesa · Buy Goods</p>
+                <p className="mt-2 font-display text-4xl sm:text-5xl font-black text-emerald-800 tracking-wider">5672838</p>
+                <p className="mt-1 text-base font-bold text-emerald-900">Business: PINPLACE</p>
+              </div>
+
+              {/* Rafiki Bank Paybill */}
+              <div className="rounded-2xl bg-sky-50 border-2 border-sky-500 p-5">
+                <p className="text-sm uppercase tracking-widest text-sky-700 font-bold">M-Pesa Paybill · Rafiki Bank</p>
+                <div className="mt-2 grid grid-cols-2 gap-3">
+                  <div>
+                    <p className="text-xs font-semibold text-sky-900/70">Business No.</p>
+                    <p className="font-display text-3xl font-black text-sky-800">802200</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-sky-900/70">Account No.</p>
+                    <p className="font-display text-3xl font-black text-sky-800">602743</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Equity Bank */}
+              <div className="rounded-2xl bg-red-50 border-2 border-red-500 p-5">
+                <p className="text-sm uppercase tracking-widest text-red-700 font-bold">Equity Bank Kenya</p>
+                <p className="mt-2 font-display text-3xl sm:text-4xl font-black text-red-800 tracking-wide break-all">0950183816898</p>
+                <p className="mt-1 text-base font-bold text-red-900">Account Name: Halel School</p>
+              </div>
+
+              {/* PayPal */}
+              <div className="rounded-2xl bg-indigo-50 border-2 border-indigo-500 p-5">
+                <p className="text-sm uppercase tracking-widest text-indigo-700 font-bold">PayPal · International</p>
+                <a href="https://www.paypal.com/paypalme/RSIMIYU7" target="_blank" rel="noreferrer" className="mt-2 block font-display text-xl sm:text-2xl font-black text-indigo-800 break-all hover:underline">
+                  RSIMIYU7@GMAIL.COM
+                </a>
+              </div>
+
+              {/* Feed a Child */}
+              <div className="rounded-2xl bg-amber-50 border-2 border-amber-500 p-5">
+                <p className="text-sm uppercase tracking-widest text-amber-700 font-bold">Feed a Child</p>
+                <ul className="mt-2 space-y-1 text-base font-semibold text-amber-900">
+                  <li><strong className="text-xl">$5</strong> — 3 meals for one day</li>
+                  <li><strong className="text-xl">$25</strong> — feed a child for a month</li>
+                  <li><strong className="text-xl">$75</strong> — feed a child for a full term</li>
                 </ul>
               </div>
-              <div className="h-px bg-border" />
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-primary">PayPal</p>
-                <a href="https://www.paypal.com/paypalme/RSIMIYU7" target="_blank" rel="noreferrer" className="mt-2 inline-block text-sm font-semibold text-primary break-all">RSIMIYU7@GMAIL.COM</a>
-              </div>
-              <div className="h-px bg-border" />
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-primary">Feed a Child</p>
-                <ul className="mt-2 text-sm space-y-1">
-                  <li><strong>$5</strong> — 3 meals for one day</li>
-                  <li><strong>$25</strong> — feed a child for a month</li>
-                  <li><strong>$75</strong> — feed a child for a full term</li>
+
+              {/* Contact */}
+              <div className="rounded-2xl bg-slate-50 border-2 border-slate-400 p-5">
+                <p className="text-sm uppercase tracking-widest text-slate-700 font-bold">Confirm your gift</p>
+                <ul className="mt-2 text-base font-bold space-y-1">
+                  <li><a href="tel:+254715297696" className="text-primary hover:underline">+254 715 297 696</a></li>
+                  <li><a href="https://wa.me/254715297696" target="_blank" rel="noreferrer" className="text-emerald-700 hover:underline">WhatsApp: +254 715 297 696</a></li>
                 </ul>
-              </div>
-              <div className="h-px bg-border" />
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-primary">Contact</p>
-                <ul className="mt-2 text-sm space-y-1">
-                  <li><a href="tel:+254715297696" className="hover:text-primary">+254 715 297 696</a></li>
-                  <li><a href="https://wa.me/254715297696" target="_blank" rel="noreferrer" className="hover:text-primary">WhatsApp: +254 715 297 696</a></li>
-                </ul>
-              </div>
-              <div className="text-xs text-muted-foreground">
-                54 Global Afrikan is a registered faith-based organisation. Gifts are used for ministry, education and community work. See our <a href="/policies/privacy" className="text-primary">privacy policy</a>.
               </div>
             </div>
           </Reveal>
