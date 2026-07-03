@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Baby, Users, Music, HandHeart, BookOpen, Sparkles, Calendar, PlayCircle, ArrowRight, Heart,
-  Globe, Church as ChurchIcon, GraduationCap, Compass, HandCoins, Smartphone, Phone,
+  Globe, Church as ChurchIcon, GraduationCap, Compass, HandCoins, Phone,
 } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { PageHero } from "@/components/site/PageHero";
