@@ -1,22 +1,14 @@
 [build]
-  command = "bun run build"
+  command = "bun install && bun run build"
   publish = "dist/client"
 
-# Nitro emits a Netlify-compatible server bundle when NITRO_PRESET is set.
 [build.environment]
-  NITRO_PRESET = "netlify"
   NODE_VERSION = "20"
 
-# Proxy Lovable-hosted CDN assets (used by the gallery, logos, payment images)
-# so `/__l5e/...` URLs keep resolving when the site is served from Netlify.
+# Proxy Lovable-hosted CDN assets (gallery images, logos, payment images)
+# so `/__l5e/...` URLs keep resolving when served from Netlify.
 [[redirects]]
   from = "/__l5e/*"
   to = "https://id-preview--a58c577e-1526-4752-b178-1c6b93b4c91b.lovable.app/__l5e/:splat"
   status = 200
   force = true
-
-# SPA fallback — route unknown paths to the SSR/client entry so deep links work.
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
