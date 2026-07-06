@@ -83,19 +83,28 @@ function GalleryPage() {
               <p className="text-sm text-muted-foreground mt-1">We'll be uploading photos and videos here shortly.</p>
             </div>
           ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {items.map((it) => (
-                <figure key={it.id} className="group relative rounded-2xl overflow-hidden glass">
+                <figure key={it.id} className="group relative rounded-2xl overflow-hidden glass bg-muted">
                   {it.kind === "video" ? (
                     <video src={it.url} controls className="w-full aspect-video bg-black object-cover" />
                   ) : (
                     <button
                       type="button"
                       onClick={() => setLightbox(it)}
-                      className="block w-full text-left cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="block w-full text-left cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-primary bg-black/5"
                       aria-label={`Open ${it.title ?? "image"} in full view`}
                     >
-                      <img src={it.url} alt={it.title ?? ""} loading="lazy" className="w-full aspect-[4/3] object-cover transition-transform group-hover:scale-105" />
+                      <img
+                        src={it.url}
+                        alt={it.title ?? ""}
+                        loading="lazy"
+                        className="w-full h-72 sm:h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                        onError={(e) => {
+                          const parent = (e.currentTarget.closest("figure") as HTMLElement | null);
+                          if (parent) parent.style.display = "none";
+                        }}
+                      />
                     </button>
                   )}
                   {(it.title || it.caption) && (
